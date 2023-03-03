@@ -122,7 +122,13 @@ display: inline-block;
 margin-top: 17px;
 }
 
+.direitos {
+    color: white;
+}
 
+a {
+    color: gray;
+}
 /* classe esconder */ 
 
 .hide {
