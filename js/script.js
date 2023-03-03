@@ -31,14 +31,40 @@ for(let i = 0; i < boxes.length; i++) {
 
             if(player1 == player2) {
                 player1++
+                if(secondPlayer == 'ai-player'){
+                    // funcao executar jogada
+                    computerplay()
+                    player2++
+                }
             }else {
                 player2++
             }
             //checa quem venceu
             checkWinCondition();
           }
+
+
     });
 }
+
+// Contra IA 
+
+for(let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function() {
+        secondPlayer = this.getAttribute("id")
+
+        for(let j = 0; j < buttons.length; j++) {
+            buttons[j].style.display = "none"
+        }
+        setTimeout(function (){
+            let container = document.querySelector("#container")
+            container.classList.remove('hide')
+          },1500)
+        
+    })
+}
+
+
 
 // vêr quem vai jogar
 function checkEl(player1,player2) {
@@ -74,10 +100,10 @@ function checkWinCondition() {
         let b3Child = b3.childNodes[0].className
 
         if(b1Child == 'x' && b2Child == 'x'  && b3Child == 'x'){
-            //x
+            declareWinner('x')
             console.log(`X VENCEU`)
         }else if(b1Child == 'o' && b2Child == 'o'  && b3Child == 'o'){
-            //o
+            declareWinner('o')
             console.log(`O VENCEU`)
         }
     }
@@ -89,10 +115,10 @@ function checkWinCondition() {
         let b6Child = b6.childNodes[0].className
 
         if(b4Child == 'x' && b5Child == 'x'  && b6Child == 'x'){
-            //x
+            declareWinner('x')
             console.log(`X VENCEU`)
         }else if(b4Child == 'o' && b5Child == 'o'  && b6Child == 'o'){
-            //o
+            declareWinner('xo')
             console.log(`O VENCEU`)
         }
     }
@@ -104,10 +130,10 @@ function checkWinCondition() {
         let b9Child = b9.childNodes[0].className
 
         if(b7Child == 'x' && b8Child == 'x'  && b9Child == 'x'){
-            //x
+            declareWinner('x')
             console.log(`X VENCEU`)
         }else if(b7Child == 'o' && b8Child == 'o'  && b9Child == 'o'){
-            //o
+            declareWinner('o')
             console.log(`O VENCEU`)
         }
     }
@@ -122,10 +148,10 @@ function checkWinCondition() {
         let b7Child = b7.childNodes[0].className
 
         if(b1Child == 'x' && b4Child == 'x'  && b7Child == 'x'){
-            //x
+            declareWinner('x')
             console.log(`X VENCEU`)
         }else if(b1Child == 'o' && b4Child == 'o'  && b7Child == 'o'){
-            //o
+            declareWinner('o')
             console.log(`O VENCEU`)
         }
     }
@@ -138,10 +164,10 @@ function checkWinCondition() {
         let b8Child = b8.childNodes[0].className
 
         if(b2Child == 'x' && b5Child == 'x'  && b8Child == 'x'){
-            //x
+            declareWinner('x')
             console.log(`X VENCEU`)
         }else if(b2Child == 'o' && b5Child == 'o'  && b8Child == 'o'){
-            //o
+            declareWinner('o')
             console.log(`O VENCEU`)
         }
     }
@@ -153,10 +179,10 @@ function checkWinCondition() {
         let b9Child = b9.childNodes[0].className
 
         if(b3Child == 'x' && b6Child == 'x'  && b9Child == 'x'){
-            //x
+            declareWinner('x')
             console.log(`X VENCEU`)
         }else if(b3Child == 'o' && b6Child == 'o'  && b9Child == 'o'){
-            //o
+            declareWinner('o')
             console.log(`O VENCEU`)
         }
     }
@@ -169,10 +195,10 @@ function checkWinCondition() {
         let b9Child = b9.childNodes[0].className
 
         if(b1Child == 'x' && b5Child == 'x'  && b9Child == 'x'){
-            //x
+            declareWinner('x')
             console.log(`X VENCEU`)
         }else if(b1Child == 'o' && b5Child == 'o'  && b9Child == 'o'){
-            //o
+            declareWinner('o')
             console.log(`O VENCEU`)
         }
     }
@@ -183,10 +209,10 @@ function checkWinCondition() {
         let b7Child = b7.childNodes[0].className
 
         if(b3Child == 'x' && b5Child == 'x'  && b7Child == 'x'){
-            //x
+            declareWinner('x')
             console.log(`X VENCEU`)
         }else if(b3Child == 'o' && b5Child == 'o'  && b7Child == 'o'){
-            //o
+            declareWinner('o')
             console.log(`O VENCEU`)
         }
     }
@@ -201,7 +227,75 @@ function checkWinCondition() {
         }
     }
         if(counter == 9) {
+            declareWinner()
             console.log('Deu velha');
         }
 
 }
+
+
+// limpa o jogo, declara o vencedor e atualiza o placar 
+
+
+function declareWinner(winner) {
+    let scoreboardX = document.querySelector('#scoreboard-1')
+    let scoreboardY = document.querySelector('#scoreboard-2')
+
+    if(winner == 'x') {
+    scoreboardX.textContent = parseInt(scoreboardX.textContent) + 1   
+    msg = " O jogador 1 venceu!"     
+    }else if(winner == 'o') {
+        scoreboardY.textContent = parseInt(scoreboardY.textContent) + 1  
+        msg = "O jogador 2 venceu!" 
+    }else {
+        msg = "Deu velha"
+    }
+    // Exibe msg
+    messageText.innerHTML = msg;
+    messageContainer.classList.remove("hide")
+
+    // esconde msg 
+
+    setTimeout(function() {
+        messageContainer.classList.add("hide")
+    }, 3000)
+
+    // zerar jogadas 
+
+    player1 = 0
+    player2 = 0
+
+    // remove 
+    let boxesToremove = document.querySelectorAll(".box div")
+
+    for(let i = 0; i < boxesToremove.length; i++) {
+        boxesToremove[i].parentNode.removeChild(boxesToremove[i])
+    }
+}
+
+
+
+// executar a lógica da jogada da CPU
+
+function computerplay() {
+    let cloneO = document.querySelector('.o').cloneNode(true);
+    let counter = 0;
+  
+    for(let i = 0; i < boxes.length; i++) {
+      let randomNumber = Math.floor(Math.random() * 3);
+  
+      if(boxes[i].childNodes[0] == undefined) {
+        if (randomNumber < 2) {
+          boxes[i].appendChild(cloneO);
+          counter++;
+          break;
+        }
+      } else {
+        counter++;
+      }
+    }
+  
+    if(counter === 0 && (playerCounter + counter) < 9) {
+      computerplay();
+    }
+  }

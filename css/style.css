@@ -1,21 +1,58 @@
 body {
     text-align: center;
     font-family: Helvetica,sans-serif;
+    background-color: black;
 }
 
 
-h1 {
-    font-size: 42px;
-}
+
 
 
 /* botões */
-
-#buttons-container button {
-    border: none;
-    padding: 10px 15px;
-    margin: 0 10px;
+#buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
 }
+#buttons-container button {
+    padding: 15px 30px;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    transition: 0.5s;
+    background: #1e1e1e;
+    color: greenyellow;
+    box-shadow: 0 0 10px #363636, inset 0 0 10px #363636;
+    cursor: pointer;
+}
+
+#buttons-container button:hover {
+    animation: a 0.5s 1 linear;
+}
+
+@keyframes a {
+    0% {
+      transform: scale(0.7, 1.3);
+    }
+  
+    25% {
+      transform: scale(1.3, 0.7);
+    }
+  
+    50% {
+      transform: scale(0.7, 1.3);
+    }
+  
+    75% {
+      transform: scale(1.3, 0.7);
+    }
+  
+    100% {
+      transform: scale(1, 1);
+    }
+  }
 
 /* jogo */
 
@@ -33,7 +70,7 @@ h1 {
 
 .box {
     height: 100px;
-    border: 5px solid #000;
+    border: 5px solid greenyellow;
     box-sizing: border-box;
     flex: 1 1 33%;
 }
@@ -88,9 +125,9 @@ margin-top: 17px;
 
 /* classe esconder */ 
 
-/* .hide {
+.hide {
    display: none !important;
-} */
+}
 
 
 /* Placar */ 
@@ -102,6 +139,7 @@ margin-top: 17px;
     position: relative;
     margin-left: auto;
     margin-right: auto;
+    color: #adff2f;
 }
 
 
@@ -129,7 +167,7 @@ margin-top: 17px;
 
 /* msg de vitória */ 
 
-/* #message p {
+#message p {
     position: absolute;
     margin-right: auto;
     margin-left: auto;
@@ -141,4 +179,14 @@ margin-top: 17px;
     background-color: black;
     color: white;
     padding: 20px;
-} */
+
+}
+
+
+
+#titulo {
+font-size: 3.4375rem;
+color: #000;
+     -webkit-text-stroke: 1px #addc23;
+      text-stroke: 2px #addc23;
+}
